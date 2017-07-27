@@ -1,5 +1,5 @@
-
 #include <sil_ext.h>
+#include <proto_prim.h>
 #include <math.h>
 
 #define IP2(x,y) ((x)[0]*(y)[0] + (x)[1]*(y)[1])
