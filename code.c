@@ -90,5 +90,6 @@ void copy(sil_State *S) {
     sil_setST(S, Gp, len);
 }
 
-void handler(const Galton *G) {
+void handler(Galton *G) {
+    free(G);
 }
