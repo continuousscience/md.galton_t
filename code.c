@@ -1,34 +1,31 @@
 #include <stdio.h>
 #include <string.h>
 
-void findme(int n) {
-    printf("%d\n", n);
-}
 char *show(const Galton *G) {
-    int len = 15 + 10*5 + 6 + 8 + 13*3; // + 29*G->nsph + 1;
+    int len = 15 + 10*5 + 6 + 9 + 13*3;
     char *out = (char *)malloc(len + 30*G->nsph + 1);
     double L[2][2];
 
     d2mv(L[0], G->frame, G->L[0]);
     d2mv(L[1], G->frame, G->L[1]);
 
-    findme(snprintf(out, len+1, "Galton object:\n"
+    snprintf(out, len+1, "Galton object:\n"
                    " gamma = %6.2f\n"
-                   " sigma = %8e\n"
+                   " sigma = %8.3e\n"
                    "     g = %6.2f %6.2f\n"
                    "     L = %6.2f %6.2f\n"
                    "         %6.2f %6.2f\n",
                 G->gamma, G->sigma,
                 G->g*G->frame[0][0], G->g*G->frame[1][0],
                 L[0][0], L[0][1],
-                L[1][0], L[1][1]));
+                L[1][0], L[1][1]);
 
     char *buf = out + len;
     const double *v = G->sph_crds;
     for(int i=0; i<G->nsph; i++, v += 3) {
         d2mv(L[0], G->frame, v);
-        findme(snprintf(buf, 31, "   sph = %6.2f %6.2f %6.2f\n",
-                            L[0][0], L[0][1], G->sph_crds[2]));
+        snprintf(buf, 31, "   sph = %6.2f %6.2f %6.2f\n",
+                            L[0][0], L[0][1], G->sph_crds[2]);
         buf += 30;
     }
 
